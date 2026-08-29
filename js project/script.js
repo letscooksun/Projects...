@@ -1,3 +1,4 @@
+//smooth scrolling
 var timeout;
 
 const scroll = new LocomotiveScroll({
@@ -5,6 +6,7 @@ const scroll = new LocomotiveScroll({
   smooth: true,
 });
 
+//animation
 function firstPageAnim(){
   var tl = gsap.timeline();
   tl.from("#nav" ,{
@@ -29,6 +31,7 @@ function firstPageAnim(){
   })
 }
 
+//mouse circle change
 function circleChaptaKaro(){
   //define default scale value
   var xscale = 1;
@@ -53,6 +56,7 @@ function circleChaptaKaro(){
   })
 }
 
+//mouse circle
 function circleMouseFollower(xscale ,yscale){
   window.addEventListener("mousemove", function(dets){
     document.querySelector("#minicircle").style.transform = `translate(${dets.clientX}px,${dets.clientY}px) scale(${xscale}, ${yscale})`;
@@ -63,6 +67,7 @@ circleMouseFollower();
 firstPageAnim();
 circleChaptaKaro();
 
+//styling of second page
 document.querySelectorAll(".elem").forEach(function(elem){
   var rotate = 0;
   var diffrot = 0;
