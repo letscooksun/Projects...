@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Todo App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="logo"><div class="logo-icon">✓</div><h1>TaskFlow</h1></div>
+            <button class="add-task-btn" id="openAddTask"><span>+</span>Add Task</button>
+
+            <nav class="navigation">
+                <button class="nav-item active" data-filter="all"><span>📋</span><span>All Tasks</span><span class="count" id="allCount">0</span></button>
+                <button class="nav-item" data-filter="today"><span>📅</span><span>Today</span><span class="count" id="todayCount">0</span></button>
+                <button class="nav-item" data-filter="upcoming"><span>🗓️</span><span>Upcoming</span><span class="count" id="upcomingCount">0</span></button>
+                <button class="nav-item" data-filter="completed"><span>✓</span><span>Completed</span><span class="count" id="completedCount">0</span></button>
+            </nav>
+
+            <div class="sidebar-section">
+                <div class="section-title"><span>Projects</span><button id="addProject">+</button></div>
+                <div id="projectsList"></div>
+            </div>
+
+            <div class="sidebar-bottom">
+                <button class="sidebar-button" id="themeToggle"><span>🌙</span>Dark Mode</button>
+                <button class="sidebar-button" id="clearCompleted"><span>🗑️</span>Clear Completed</button>
+            </div>
+        </aside>
+
+        <main class="main">
+            <header class="topbar">
+                <div class="mobile-logo"><h2>TaskFlow</h2></div>
+                <div class="search-container">
+                    <span>⌕</span>
+                    <input type="text" id="searchInput" placeholder="Search tasks...">
+                    <kbd>Ctrl K</kbd>
+                </div>
+                <div class="top-actions"><button id="notificationBtn">🔔</button><div class="avatar">U</div></div>
+            </header>
+
+            <section class="dashboard">
+                <div class="welcome">
+                    <p id="currentDate"></p>
+                    <h2>Good evening 👋</h2>
+                    <p>Let's get things done.</p>
+                </div>
+
+                <div class="statistics">
+                    <div class="stat-card"><div class="stat-icon blue">📋</div><div><span>Total Tasks</span><strong id="totalTasks">0</strong></div></div>
+                    <div class="stat-card"><div class="stat-icon green">✓</div><div><span>Completed</span><strong id="completedTasks">0</strong></div></div>
+                    <div class="stat-card"><div class="stat-icon orange">⚡</div><div><span>Pending</span><strong id="pendingTasks">0</strong></div></div>
+                    <div class="stat-card"><div class="stat-icon purple">📊</div><div><span>Progress</span><strong id="progressPercent">0%</strong></div></div>
+                </div>
+            </section>
+
+            <section class="tasks-section">
+                <div class="tasks-header">
+                    <div><h2 id="taskTitle">All Tasks</h2><p id="taskSubtitle">Manage all your tasks</p></div>
+                    <div class="task-controls">
+                        <select id="sortSelect">
+                            <option value="created">Recently Created</option>
+                            <option value="priority">Priority</option>
+                            <option value="due">Due Date</option>
+                            <option value="alphabetical">Alphabetical</option>
+                        </select>
+                        <button id="filterBtn">Filter</button>
+                    </div>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-info"><span>Today's progress</span><span id="progressText">0 / 0</span></div>
+                    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+                </div>
+
+                <div id="taskList" class="task-list"></div>
+
+                <div id="emptyState" class="empty-state">
+                    <div class="empty-icon">✓</div>
+                    <h3>No tasks found</h3>
+                    <p>Create a new task to get started.</p>
+                    <button id="emptyAddTask">Add your first task</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="taskModal">
+        <div class="modal">
+            <div class="modal-header"><h2 id="modalTitle">Create Task</h2><button class="close-modal" id="closeModal">×</button></div>
+            <form id="taskForm">
+                <input type="hidden" id="taskId">
+                <div class="form-group"><label>Task name</label><input type="text" id="taskName" placeholder="What needs to be done?" required></div>
+                <div class="form-group"><label>Description</label><textarea id="taskDescription" placeholder="Add some details..."></textarea></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Priority</label><select id="taskPriority"><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option></select></div>
+                    <div class="form-group"><label>Due date</label><input type="date" id="taskDueDate"></div>
+                </div>
+                <div class="form-group"><label>Project</label><select id="taskProject"><option value="">No Project</option></select></div>
+                <div class="form-group"><label>Tags</label><input type="text" id="taskTags" placeholder="work, coding, college"></div>
+                <div class="modal-actions"><button type="button" class="cancel-btn" id="cancelTask">Cancel</button><button type="submit" class="save-btn">Save Task</button></div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="confirmModal">
+        <div class="confirm-box">
+            <h2>Delete task?</h2><p>This action cannot be undone.</p>
+            <div class="confirm-actions"><button id="cancelDelete">Cancel</button><button id="confirmDelete" class="danger">Delete</button></div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">Task created successfully</div>
+    <script src="script.js"></script>
+</body>
+</html>
